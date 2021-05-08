@@ -81,3 +81,22 @@ app.get('/api/posts/', (req,res)=>{
     res.send(posts.reverse());
 })
 
+
+// Endpoint to retrieve a post by its id
+app.get('/api/posts/:id',(req, res)=>{
+
+    const id = req.params.id;
+
+    //using lodash's find function id and return its contents
+    const post = _.find(posts, (post)=> post.id === id);
+
+    //handle error
+    if(!post){
+        return res.status(400).send(
+            createError('Post not found')
+        )
+    }
+    res.send(post);
+})
+
+
