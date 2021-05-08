@@ -100,9 +100,9 @@ app.get('/api/posts/:id',(req, res)=>{
 })
 
 //endpoint update post by id
-app.put('api/posts/:id',
+app.put('/api/posts/:id',
     [
-        body('title').isString().isString(),
+        body('title').isString(),
         body('content').isString()
     ],
     (req,res) =>{
@@ -112,7 +112,7 @@ app.put('api/posts/:id',
             return res.status(422).json({errors: errors.array() })
         }
 
-        const id =req.params.id;
+        const id = req.params.id;
         const{title, content} = req.body;
         
         const updatedPost = {
@@ -135,4 +135,28 @@ app.put('api/posts/:id',
         res.send(updatedPost);
 });
 
+//endpoint to delete post using post's id
+app.delete('/api/posts/:id', (req, res)=> {
 
+    const id = req.params.id;
+    const index = _.findIndex(posts, (post)=> post.id === id);
+     if(index ==-1){
+         return res.status(400).send(
+             createError('Post not found')
+         )
+     }
+     //Remove the post
+     posts = posts.splice(index, 1);
+     
+     res.send({
+         'message' : `Post with id ${id} has been successfuly deleted`
+     })
+})
+
+
+// Return an error if route does not exist in our server
+app.all('*', (req, res)=> {
+    return res.status(404).send(
+        createError('Not Found')
+    )
+})
