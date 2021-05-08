@@ -99,4 +99,21 @@ app.get('/api/posts/:id',(req, res)=>{
     res.send(post);
 })
 
+//endpoint update post by id
+app.put('api/posts/:id',
+    [
+        body('title').isString().isString(),
+        body('content').isString()
+    ],
+    (req,res) =>{
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return res.status(422).json({errors: errors.array() })
+        }
+        
+    }
+
+)
+
 
