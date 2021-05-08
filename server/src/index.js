@@ -73,5 +73,11 @@ app.post(
     // signify the successful creation of the post
         res.status(201).send(post);
     });
-    
+
+//endpoint to list all the posts 
+app.get('/api/posts/', (req,res)=>{
+    // Return the list of posts in reverse with the
+    // status code 200 to signify successful retrieval
+    res.send(posts.reverse());
+})
 
