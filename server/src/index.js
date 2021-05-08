@@ -111,9 +111,28 @@ app.put('api/posts/:id',
         if(!errors.isEmpty()){
             return res.status(422).json({errors: errors.array() })
         }
-        
-    }
 
-)
+        const id =req.params.id;
+        const{title, content} = req.body;
+        
+        const updatedPost = {
+            id,
+            title,
+            content
+        }
+          // Retrieve the index of the OLDpost using its id
+        const index = _.findIndex(posts, (post)=> post.id === updatedPost.id);
+
+        //handling error & return 400 bad request if index is -1 
+        if(index === -1){
+            return res.status(400).send(
+                createError('Post not found')
+            )
+        }
+        // Replace the stored post with the updated one
+        posts[index] = updatedPost;
+
+        res.send(updatedPost);
+});
 
 
