@@ -12,7 +12,7 @@ var app = express();
 
 // variable for Authentication, Category, and Post route.
 var auth = require('./routes/auth');
-var category = require('./routes/cateegory');
+var category = require('./routes/category');
 var post = require('./routes/post');
 
 //intialize passport

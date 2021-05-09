@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var CategorySchema = new mongoose.Schema({
-    id: string,
+    id: String,
     catName: String,
     catDesc: String,
     catImgUrl: String,
