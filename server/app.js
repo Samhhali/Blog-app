@@ -3,11 +3,25 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// variable for Authentication, Category, and Post route.
+var auth = require('./routes/auth');
+var category = require('./routes/cateegory');
+var post = require('./routes/post');
+
+//intialize passport
+app.use(passport.initialize());
+
+app.use('/api/auth', auth);
+app.use('/api/category', category);
+app.use('/api/post', post);
+
 
 app.use(logger('dev'));
 app.use(express.json());
