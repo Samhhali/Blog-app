@@ -10,8 +10,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { hasUncaughtExceptionCaptureCallback } from 'process';
-import { asLiteral } from '@angular/compiler/src/render3/view/util';
+
 
 
 // class that implementing HttpInterceptor method
