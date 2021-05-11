@@ -5,20 +5,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var Post = require('../models/Post');
+var getToken = require('./getToken');
 
-// function to get and extract the token from the request headers.
-getToken = function (headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split(' ');
-        if (parted.length === 2) {
-            return parted[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
-};
 
 //route to GET the list of posts
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {

@@ -5,21 +5,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var Category = require('../models/Category');
+var getToken = require('./getToken');
 
-// function to get and extract the token from the request headers.
-// take headers then give token
-getToken = function (headers) {
-    if (headers && headers.authorization) {
-        var parted = headers.authorization.split(' ');
-        if (parted.length === 2) {
-            return parted[1];
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
-};
 
 //route to get the list of the category.
 router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
