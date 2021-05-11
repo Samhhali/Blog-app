@@ -1,7 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+
 
 const apiUrl = 'http://localhost:3000/api/auth/';
 
@@ -13,7 +14,7 @@ export class AuthService {
 
   @Output() isLoggedIn: EventEmitter<any> = new EventEmitter();
   loggedInStatus = false;
-  redirectUrl: string;
+  redirectUrl: string = '';
 
   constructor(private http: HttpClient) { }
 
