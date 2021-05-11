@@ -30,7 +30,7 @@ Third terminal tap inside the blog-app/client folder:
 ng serve
 ```
 
-##Roadmap
+## Roadmap
 I'm planing to continue developing the project.
 on the plan: 
 1. Make it a Doker friend!
@@ -39,5 +39,5 @@ on the plan:
 4. ...
 
 
-##Project status
+## Project status
 Under Development.
