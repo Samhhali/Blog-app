@@ -10,12 +10,10 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-// variable for Authentication, Category, and Post route.
 var auth = require('./routes/auth');
 var category = require('./routes/category');
 var post = require('./routes/post');
 
-//intialize passport
 app.use(passport.initialize());
 
 app.use('/api/auth', auth);
@@ -38,7 +36,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/blog-app', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-}).then(()=> console.log('Connecetion successful'))
+}).then(()=> console.log('Connection successful'))
 .catch((err) => console.error(err));
 
 module.exports = app;
