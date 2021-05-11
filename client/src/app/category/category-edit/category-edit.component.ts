@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../../category.service';
+import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from 'src/app/auth/auth-helper-function';
 
 @Component({
   selector: 'app-category-edit',
@@ -7,9 +11,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryEditComponent implements OnInit {
 
-  constructor() { }
+  categoryForm: FormGroup;
+  id = '';
+  catName = '';
+  catDesc = '';
+  catImgUrl = '';
+  catContent = '';
+  updated: Date = null;
+  isLoadingResults = false;
+  matcher = new MyErrorStateMatcher();
 
-  ngOnInit(): void {
+  constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService, private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.getCategory(this.route.snapshot.params.id);
+    this.categoryForm = this.formBuilder.group({
+      catName : [null, Validators.required],
+      catDesc : [null, Validators.required],
+      catImgUrl : [null, Validators.required],
+      catContent : [null, Validators.required]
+    });
+  }
+
+  getCategory(id: any) {
+    this.api.getCategory(id).subscribe((data: any) => {
+      this.id = data.id;
+      this.categoryForm.setValue({
+        prod_name: data.prod_name,
+        prod_desc: data.prod_desc,
+        prod_price: data.prod_price
+      });
+    });
+  }
+
+  onFormSubmit() {
+    this.isLoadingResults = true;
+    this.api.updateCategory(this.id, this.categoryForm.value)
+      .subscribe((res: any) => {
+          const id = res.id;
+          this.isLoadingResults = false;
+          this.router.navigate(['/category-details', id]);
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+  }
+
+  categoryDetails() {
+    this.router.navigate(['/category-details', this.id]);
   }
 
 }

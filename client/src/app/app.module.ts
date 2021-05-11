@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Angular Material modules
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -32,7 +33,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatContenteditableModule } from 'mat-contenteditable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -71,7 +73,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatFormFieldModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    CKEditorModule,
+    MatContenteditableModule
   ],
   providers: [
     {
